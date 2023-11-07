@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: motorhead
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    env: docker
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: MOTORHEAD_MAX_WINDOW_SIZE
+        value: "25"
+      - key: MOTORHEAD_LONG_TERM_MEMORY
+        value: "true"
+      - key: MOTORHEAD_MODEL
+        value: "gpt-3.5-turbo"
+      - key: REDIS_URL
+        value: "redis://redis:6379"
+    ports:
+      - "8080:8080"
+
+  - type: redis
+    name: redis
+    image: redis/redis-stack-server:latest
+    ports:
+      - "6379"
