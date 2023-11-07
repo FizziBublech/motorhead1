@@ -2,7 +2,9 @@ services:
   - type: web
     name: motorhead
     env: docker
-    buildCommand: "./build-script.sh" # You should replace this with your actual build command.
+    buildCommand: "./build-script.sh" # Replace with your actual build command
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: PORT
         value: "8080"
@@ -14,10 +16,5 @@ services:
         value: "gpt-3.5-turbo"
       - key: REDIS_URL
         value: "redis://redis:6379"
-    port: 8080
 
-databases:
-  - type: redis
-    name: redis
-    port: 6379
 
